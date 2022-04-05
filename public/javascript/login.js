@@ -6,10 +6,13 @@ async function loginHandler(event) {
 
     const email  = document.querySelector('#email-login').value.trim();
     const password  = document.querySelector('#password-login').value.trim();
+    console.log(email);
+    console.log(password);
 
     if (email && password) {
+        // the password is not making it through the checks of this back end route in the user-routes.js
         const response = await fetch('/api/users/login', {
-            method: 'post',
+            method: 'POST',
             body: JSON.stringify({
                 email,
                 password
@@ -19,9 +22,12 @@ async function loginHandler(event) {
 
         if (response.ok) {
             // document.location.reload('/');
+            // can have a redirect to a page with a different buton instead of log insincwe user will already be logged in
+            console.log('logged in');
         } else {
-            throw error(response.statusText);
+            console.log(response.statusText + ' ' + response.status);
         }
+        
     }
 
 }
@@ -30,5 +36,4 @@ async function loginHandler(event) {
 
 
 // listening for log in button click
-document.querySelector('.login-form').addEventListener('submit', loginHandler);
-
+document.querySelector('#login-btn').addEventListener('click', loginHandler);
