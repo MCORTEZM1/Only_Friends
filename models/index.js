@@ -25,10 +25,10 @@ Comment.belongsTo(Post, {
     foreignKey: 'post_id',
     constraints:false
 });
-Friend.belongsTo(User, {
-    foreign_key:'user_id', 
-    constraints:false
-});
+// Friend.belongsTo(User, {
+//     foreign_key:'user_id', 
+//     constraints:false
+// });
 
 
 

@@ -12,14 +12,14 @@ Friend.init(
             primaryKey: true,
             autoIncrement: true
         },
-        friend_name: {
-            type:DataTypes.STRING,
+        user_id_1: {
+            type:DataTypes.INTEGER,
             references: {
                 model: 'user',
-                key: 'username'
+                key: 'id'
             }
         },
-        user_id: {
+        user_id_2: {
             type: DataTypes.INTEGER,
             references: {
                 model: 'user',
