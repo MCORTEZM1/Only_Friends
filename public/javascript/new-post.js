@@ -14,3 +14,32 @@ closePostModal.addEventListener("click", function() {
     newPostModal.classList.remove("modal");
     body.style.overflow="visible";
 });
+
+async function newFormHandler(event) {
+    event.preventDefault();
+  
+    const title = document.querySelector('#new-title').value;
+    const post_body = document.querySelector('#new-body').value;
+    const category_name= document.querySelector('#new-category').value
+  
+    const response = await fetch(`/api/posts`, {
+      method: 'POST',
+      body: JSON.stringify({
+        title,
+        post_body,
+        category_name
+      }),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+  
+    if (response.ok) {
+      document.location.replace('/');
+    } else {
+      alert(response.statusText );
+    }
+}
+  
+document.querySelector('#submit-post').addEventListener('click', newFormHandler);
+  
