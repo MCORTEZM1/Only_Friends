@@ -3,22 +3,27 @@ const router = require('express').Router();
 const sequelize = require('../config/connection');
 const { Post, User, Channel, Comment } = require('../models');
 
+
 // route to render the homepage view .this is view for all visitors to site loggedIn or NOT
 // this will show the channels /can be changed to show something else 
 // not sure exactly what we want here 
-router.get('/', (req, res) => {
-<<<<<<< HEAD
- 
-
-
-
-=======
+router.get('/',(req, res) => {
 // check if the user is logged in then render the homepage 
->>>>>>> feature/category-fetch
     // idk what to put here i was going to put channel but theres no channel_name, 
     // this needs to be determined 
+    User.findAll({
+        attributes:[
+            'username'
+        ]
+    })
+    .then(userData => {
+        const users = userData.map(user => user.get({ plain: true }));
 
-    res.render('homepage',{loggedIn: req.session.loggedIn});
+
+        res.render('homepage',{
+            users,
+            loggedIn: req.session.loggedIn});
+    })
 
 });
 
@@ -32,7 +37,8 @@ router.get('/post/:id', (req, res) => {
             'id',
             'title',
             'post_body',
-            'created_at'
+            'created_at',
+            'image_path'
 
         ],
         include: [
@@ -42,7 +48,8 @@ router.get('/post/:id', (req, res) => {
                     'id',
                     'comment_text',
                     'user_id',
-                    'post_id'
+                    'post_id',
+                    'created_at'
                 ],
                 include: {
                     model: User,
@@ -65,8 +72,8 @@ router.get('/post/:id', (req, res) => {
 
             // pass data to template 
             res.render('single-post', {
-                post
-                // loggedIn:req.session.loggedIn
+                post,
+                loggedIn:req.session.loggedIn
             });
         })
         .catch(err => {
@@ -89,7 +96,8 @@ router.get('/post/category/:category_name', (req, res) => {
             'title',
             'post_body',
             'category_name',
-            'created_at'
+            'created_at',
+            'image_path'
         ],
         order: [['created_at', 'DESC']],
         include: [
@@ -126,8 +134,8 @@ router.get('/post/category/:category_name', (req, res) => {
             // pass data to template 
             res.render('posts-by-category', {
                 posts,
-                category_name: posts[0].category_name
-                // loggedIn:req.session.loggedIn
+                category_name: posts[0].category_name,
+                loggedIn:req.session.loggedIn
             });
         })
         .catch(err => {
@@ -185,9 +193,7 @@ router.get('/post/user/page/:username', (req, res) => {
                     res.render('posts-by-user', {
                         user,
                         posts,
-
-
-                        // loggedIn:req.session.loggedIn
+                        loggedIn:req.session.loggedIn
                     })
                 });
         })
@@ -198,22 +204,5 @@ router.get('/post/user/page/:username', (req, res) => {
 
 });
 
-
-
-// login route to renderlogin.handlebars/using modal now
-// router.get('/login', (req,res) => {
-//     // check for login and return to homepage if logged in
-//     if(req.session.loggedIn) {
-//         res.redirect('/');
-//         return;
-//     }
-
-//     res.render('login');
-// });
-
-// signup route commented out bc not rendering page anymore /using modal 
-// router.get('/signup', (req, res) => {
-//     res.render('signup');
-//   });
 
 module.exports = router;

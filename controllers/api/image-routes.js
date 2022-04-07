@@ -18,7 +18,7 @@ const upload = multer({ storage: imageStorageEngine });
 
 // Get an image -> maybe a front end route? 
 router.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, "index.html"))
+  res.sendFile(path.join(__dirname, "../../index.html"))
 });
 
 // // POST 1 single image

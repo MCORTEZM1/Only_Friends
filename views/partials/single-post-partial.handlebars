@@ -1,0 +1,64 @@
+
+    <div class="card">
+        <h5 class="card-header">{{user.username}}</h5>
+        <div class="card-body">
+            <h5 class="card-title">{{title}}</h5>
+
+
+            <p class="card-text">
+                {{post_body}}
+            </p>
+            <img src="{{image_path}}">
+        </div>
+
+
+
+        <div class="card-footer">
+            <small class="text-muted">posted by {{user.username}} on
+                {{created_at}}
+
+                {{!-- <a href="/post/{{id}}">{{comments.length}} comment(s)</a></small> --}}
+        </div>
+    </div>
+   
+
+    {{!-- <div class="meta">
+        posted by {{user.username}} on
+        {{created_at}}
+        |
+        {{!-- <a href="/post/{{id}}">{{comments.length}} comment(s)</a> --}}
+        {{!-- </div>
+</article>
+<div class="card">
+    <h5 class="card-header">{{user.username}}</h5>
+    <div class="card-body">
+        <h5 class="card-title">{{title}}</h5>
+
+
+        <p class="card-text">
+            {{post_body}}
+        </p>
+    </div>
+    <div class="card-footer">
+        <small class="text-muted">posted by {{user.username}} on
+            {{created_at}}
+            |
+            <a href="/post/{{id}}">{{comments.length}} comment(s)</a></small>
+    </div>
+</div> --}}
+
+
+
+{{!-- <div class="article-container">
+    {{#each comments as |comment|}}
+    <div>
+        <div>
+            {{user.username}}
+            <div> {{created_at}} </div>
+        </div>
+    </div>
+    <div>
+        {{coments.comment_text}}
+    </div>
+    {{/each}}
+</div> --}}

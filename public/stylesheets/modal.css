@@ -14,7 +14,7 @@
     margin: 0px;
 }
 
-.login-form, .signup-form {
+.login-form, .signup-form, .new-post-form {
     border: 2px solid var(--accent-color);
     background-color: var(--background-color);
     padding: 20px;

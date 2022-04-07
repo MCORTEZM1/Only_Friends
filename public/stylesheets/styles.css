@@ -107,6 +107,7 @@ ul{
     height: 150px;
     border: 2px solid black;
     border-radius: 5px;
+    background-color: var(--background-color);
 }
 
 .cat-img:hover {
@@ -135,4 +136,36 @@ ul{
 
 .commentPadding {
     padding: 10px;
+}
+
+.article-container {
+    border: 2px solid var(--accent-color);
+    margin: 2px;
+}
+
+textarea {
+    resize: none;
+}
+/* samm added margin bottom so cards arent flush up on eachother, and a border on each card  */
+.card{
+margin-bottom: 15px;
+border:2px solid grey;
+}
+/* samm added styling to card header  */
+.card-header {
+    background-color:rgb(125,180,181);
+    color:whitesmoke;
+}
+.card-container {
+    background-color: var(--container-color--);
+    color:black;
+    border: 1px solid grey;
+    margin-top:15px;
+    
+}
+
+.comment {
+    border-bottom:1px solid black;
+    padding: 10px;
+
 }

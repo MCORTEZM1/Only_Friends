@@ -1,4 +1,18 @@
 {{!-- plugged in  dummy template for single post url to render post title, post body, and username and a link to comments  --}}
-{{>postarticle post}}
+{{>single-post-partial post}}
 
 {{!-- front end logic script tage will go below this line  --}}
+{{#if loggedIn}}
+<form class="comment-form">
+    <div>
+        <textarea name="new-comment" id="new-comment" class="article-container" cols="300" rows="10"></textarea>
+        <button type="submit">Comment</button>
+    </div>
+</form>
+<script src="/javascript/comment.js"></script>
+{{else}}
+<p>Please log in to comment</p>
+{{/if}}
+
+
+{{>show-comments post}}

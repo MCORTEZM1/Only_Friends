@@ -1,4 +1,5 @@
 const { Model, DataTypes } = require('sequelize');
+const { now } = require('sequelize/types/utils');
 const sequelize = require('../config/connection');
 
 
@@ -12,7 +13,7 @@ Friend.init(
             primaryKey: true,
             autoIncrement: true
         },
-        user_1: {
+        user_id1: {
             type: DataTypes.INTEGER,
             allowNull: false,
             references: {
@@ -20,7 +21,7 @@ Friend.init(
                 key: 'id'
             }
         },
-        user_2: {
+        user_id2: {
             type: DataTypes.INTEGER,
             allowNull: false,
 
@@ -32,6 +33,11 @@ Friend.init(
         are_friends:{
            type: DataTypes.BOOLEAN,
            defaultValue:false,
+        },
+        friends_since: {
+            type:DataTypes.DATEONLY,
+            allowNull:false,
+            defaultValue:now
         }
     },
     {

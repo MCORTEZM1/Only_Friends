@@ -1,14 +1,16 @@
 const searchButtonEl = document.querySelector('#user-search-bar');
 const searchBarEl = document.querySelector('#search-bar');
-
-// function to handel search bar when clicked
-function searchBarHandeler(event) {
+let usersArray = [];
+// function to fetch all user data 
+async function getAllUsers(event) {
     console.log('Search bar pressed')
+    // this graves the text from the text box
     const userName = searchBarEl.value;
-    console.log(userName);
-    // search bar needs to get value and then do a redirect with the value at the end of the routes
-    // still need a back end route to search by user and test
-    document.location.replace('/');
-}
+   
+    document.location.replace(`/post/user/page/${userName}`);
+    
+};
 
-searchButtonEl.addEventListener('click', searchBarHandeler);
+
+
+searchButtonEl.addEventListener('click', getAllUsers);

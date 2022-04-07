@@ -1,8 +1,9 @@
 
     <h1>Friends Who Post About {{category_name}}</h1>
     {{#each posts as |post|}}
-      {{> postarticle post }}
+       {{> postarticle post }}
     {{/each}}
 
 {{!-- create partial for the post articles/cards lines 4 -18 so that it can be consistent thru out the site
 in order to use it {{> partialname 'alias'}} --}}
+

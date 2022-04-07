@@ -20,9 +20,7 @@
   <div class="top-padding">
   {{{body}}}
   </div>
-{{!-- Modals for login/signup --}}
-  {{> login-modal}}
-  {{> signup-modal}}
+
 
   {{!-- Footer **Will add our contact: thinking of just putting contributers on seperate page and hard code that in the server -Jim **--}}
   <footer>
@@ -33,11 +31,14 @@
   <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
   {{#if loggedIn}}
   <script src="/javascript/logout.js"></script>
+  <script src="/javascript/new-post.js"></script>
+  <script src="/javascript/searchbar.js"></script>
+  {{!-- <script src="../../controllers/api/image-engine.js"></script> --}}
   {{else}}
   <script src="/javascript/login.js"></script>
   <script src="/javascript/signup.js"></script>
   <script src="/javascript/utils/modal.js"></script>
-  <script src="/javascript/searchbar.js"></script>
+
   {{/if}}
 </body>
 

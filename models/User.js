@@ -17,6 +17,10 @@ User.init(
             primaryKey:true,
             allowNull:false,
         },
+        image_path: {
+            type: DataTypes.STRING,
+            allowNull: true,
+        },
         // username column takes a string cannot be null
         username:{
             type:DataTypes.STRING,

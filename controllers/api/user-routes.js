@@ -1,10 +1,25 @@
 const router = require("express").Router();
 const { User, Post, Comment } = require('../../models');
+const upload = require('./image-engine');
 
 // GET all Users
 router.get('/', (req, res) => {
     User.findAll({
-        attributes: { exclude: ['password'] }
+        attributes: { exclude: ['password'] },
+        include: [
+            {
+                model: Post,
+                attributes: ['id', 'title', /*'preview',*/ 'post_body', 'created_at', 'image_path']
+            },
+            {
+                model: Comment,
+                attributes: ['id', 'comment_text', 'created_at'],
+                include: {
+                    model: Post,
+                    attributes: ['title', 'id']
+                }
+            }
+        ]
     })
         .then(userData => res.json(userData))
         .catch(err => {
@@ -24,7 +39,7 @@ router.get('/:id', (req, res) => {
         include: [
             {
                 model: Post,
-                attributes: ['id', 'title', /*'preview',*/ 'post_body', 'created_at']
+                attributes: ['id', 'title', /*'preview',*/ 'post_body', 'created_at', 'image_path']
             },
             {
                 model: Comment,
@@ -52,16 +67,17 @@ router.get('/:id', (req, res) => {
 
 // POST create new User 
 router.post('/', (req, res) => {
+
     User.create({
         username: req.body.username,
         email: req.body.email,
-        password: req.body.password
+        password: req.body.password,
     })
         .then(userData => {
             // save user data to session to give server access to user_id, username, and logged in status as boolean
             req.session.save(() => {
                 req.session.user_id = userData.id,
-                    req.session.username = userData.username;
+                req.session.username = userData.username;
                 req.session.loggedIn = true;
 
                 res.json(userData)
@@ -74,11 +90,13 @@ router.post('/', (req, res) => {
 });
 
 // PUT update username or email 
-router.put('/:id', (req, res) => {
+router.put('/:id', upload.single('profile_pic'), (req, res) => {
+    console.log(req.file)
     User.update(
         {
             username: req.body.username,
-            email: req.body.email
+            email: req.body.email,
+            image_path: req.file.path
         },
         {
             individualHooks: true,
@@ -128,6 +146,7 @@ router.post('/login', (req, res) => {
             email: req.body.email
         }
     })
+<<<<<<< HEAD
         .then(userData => {
             if (!userData) {
                 res.status(400).json({ message: 'No user associated with that email address' });
@@ -140,15 +159,32 @@ router.post('/login', (req, res) => {
                 res.status(400).json({ message: 'Incorrect password!' });
                 return;
             }
+=======
+    .then(userData => {
+        if(!userData) {
+            res.status(400).json({ message: 'No user associated with that email address' });
+            return;
+        }
+// NOTE: the password is triggering this block of code
+// ****
+        const checkPass = userData.validatePassword(req.body.password);
+        console.log(checkPass);
+        if (!checkPass) {
+            res.status(400).json({ message: 'Incorrect password!' });
+            return;
+        }
+>>>>>>> 7988b693239e8028b55da5222e73aabf09f9d61f
 
-            req.session.save(() => {
-                req.session.user_id = userData.id,
-                    req.session.username = userData.username;
-                req.session.loggedIn = true;
+        req.session.save(() => {
+            req.session.user_id = userData.id,
+            req.session.username = userData.username;
+            req.session.loggedIn = true;
 
-                res.json({ user: userData, message: `You are now logged in as ${userData.username}` })
-            })
-        })
+            res.json({ user: userData, message: `You are now logged in as ${userData.username}` })
+            console.log(req.session)
+        });
+        
+    });
 });
 
 // USER logout route

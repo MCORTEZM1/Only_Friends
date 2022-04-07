@@ -15,6 +15,10 @@ Post.init(
             primaryKey: true,
             autoIncrement: true
         },
+        image_path: {
+            type: DataTypes.STRING,
+            allowNull: true,
+        },
         // address string length in the future for title
         title: {
             type: DataTypes.STRING,

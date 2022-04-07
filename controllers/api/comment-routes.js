@@ -1,9 +1,9 @@
 const router = require("express").Router();
 const { User, Post, Comment } = require('../../models');
-
+const withAuth = require('../../public/javascript/utils/auth');
 
 // GET all comments 
-router.get('/', (req, res) => {
+router.get('/',(req, res) => {
     Comment.findAll({
         attributes: [
             'id',
@@ -24,8 +24,9 @@ router.get('/', (req, res) => {
 });
 
 // GET 1 post by id 
+// changed findAll to findOne 
 router.get('/:id', (req, res) => {
-    Comment.findAll({
+    Comment.findOne({
         where: {
             id: req.params.id
         },
@@ -57,26 +58,32 @@ router.get('/:id', (req, res) => {
     })
 });
 
+// we were working w/ Jaydon here vvvvvvvvvv
 
 // POST create a Comment
-router.post('/', (req, res) => {
-    Comment.create({
+router.post('/:id', withAuth, (req, res) => {
+    console.log("IN HERERERERERE!!!!!!!!!!!!!!!!!")
+    Comment.create(     
+        {
     // uncomment if statment and req.session.user_id [delete 'req.body.user_id'] once we are working it into the front end 
-    // if(req.session) {
             comment_text: req.body.comment_text,
-            user_id: req.body.user_id /* req.session.user_id*/,
-            post_id: req.body.post_id
+            user_id: req.session.user_id,
+            post_id: req.params.id,
+            
         })
-        .then(commentData => res.json(commentData))
+        .then(commentData => {
+            
+           res.json(commentData);
+        })
         .catch(err => {
             console.log(err);
             res.status(500).json(err);
         });
-    //}
+
 });
 
 // PUT update comment text 
-router.put('/:id', (req, res) => {
+router.put('/:id', withAuth,(req, res) => {
     Comment.update(
         {
             comment_text: req.body.comment_text
@@ -102,7 +109,7 @@ router.put('/:id', (req, res) => {
 
 
 // Delete a comment 
-router.delete('/:id', (req, res) => {
+router.delete('/:id', withAuth,(req, res) => {
     Comment.destroy({
         where: {
             id: req.params.id

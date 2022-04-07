@@ -29,3 +29,4 @@ closeSignupModal.addEventListener("click", function() {
     signupModal.classList.remove("modal");
     body.style.overflow="visible";
 });
+

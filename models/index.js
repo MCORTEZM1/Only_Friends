@@ -15,7 +15,6 @@ Post.belongsTo(User, {
     constraints:false
 });
 
-
 Comment.belongsTo(User, {
     foreignKey: 'user_id',
     constraints:false
@@ -29,7 +28,6 @@ Comment.belongsTo(Post, {
 //     foreign_key:'user_id', 
 //     constraints:false
 // });
-
 
 
 // 1-to-Many relations 

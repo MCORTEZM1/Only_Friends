@@ -1,0 +1,17 @@
+<div class="card-container">
+    {{#each comments as |comment|}}
+
+    <div class ="comment">
+        <div>
+            {{user.username}}
+            <div>
+                {{comment.created_at}}
+            </div>
+        </div>
+    </div>
+    <div>
+        {{comment.comment_text}}
+    </div>
+
+    {{/each}}
+</div>

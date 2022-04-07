@@ -6,10 +6,15 @@
         <button id="user-search-bar" class="col-3">Search</button>
       
         {{#if loggedIn}}
-          <button class="col-1 userBtn">logout</button>
+          <button class="col-1 userBtn" id="logout">Logout</button>
+          <button class="col-1 userBtn" id="new-post">Create Post</button>
+          {{> new-post}}
         {{else}}
           <button class="col-1 userBtn" id="open-login-modal">Log In</button>
           <button class="col-1 userBtn" id="open-signup-modal">Sign Up</button>
+          {{!-- Modals for login/signup --}}
+          {{> login-modal}}
+          {{> signup-modal}}
         {{/if}}
       </div>
     </div>
