@@ -146,20 +146,6 @@ router.post('/login', (req, res) => {
             email: req.body.email
         }
     })
-<<<<<<< HEAD
-        .then(userData => {
-            if (!userData) {
-                res.status(400).json({ message: 'No user associated with that email address' });
-                return;
-            }
-            // NOTE: the password is triggering this block of code
-            // ****
-            const checkPass = userData.validatePassword(req.body.password);
-            if (!checkPass) {
-                res.status(400).json({ message: 'Incorrect password!' });
-                return;
-            }
-=======
     .then(userData => {
         if(!userData) {
             res.status(400).json({ message: 'No user associated with that email address' });
@@ -173,7 +159,6 @@ router.post('/login', (req, res) => {
             res.status(400).json({ message: 'Incorrect password!' });
             return;
         }
->>>>>>> 7988b693239e8028b55da5222e73aabf09f9d61f
 
         req.session.save(() => {
             req.session.user_id = userData.id,
