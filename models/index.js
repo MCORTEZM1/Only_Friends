@@ -2,15 +2,13 @@
 const User = require('./User');
 const Post = require('./Post');
 const Comment = require('./Comment');
-const Channel = require('./Channel');
+// const Friend = require('./Friend');
+
 
 
 // 1-to-1 relations 
 
-User.hasOne(Channel, {
-    foreignKey: 'user_id',
-    constraints:false
-});
+
 
 Post.belongsTo(User, {
     foreignKey: 'user_id',
@@ -26,13 +24,17 @@ Comment.belongsTo(Post, {
     foreignKey: 'post_id',
     constraints:false
 });
+// Friend.belongsTo(User, {
+//     foreign_key:'user_id', 
+//     constraints:false
+// });
 
-Channel.belongsTo(User, {
-    foreignKey: 'user_id',
-    constraints: false
-});
 
 // 1-to-Many relations 
+// User.hasMany(Friend, {
+//     foreignKey:'user_id',
+//     constraints:false
+// });
 User.hasMany(Comment, {
     foreignKey: 'user_id',
     constraints:false
@@ -48,14 +50,15 @@ Post.hasMany(Comment, {
     constraints:false
 });
 
-// Channel.hasMany(Post, {
-//     foreignKey: 'channel_id',
-//     constraints:false
-// }); 
+// many to many relationship for friendships
+User.belongsToMany(User, { as: 'Friends', through: 'friends' });
+User.belongsToMany(User, { as: 'Requestees', through: 'friendRequests', foreignKey: 'requesterId', onDelete: 'CASCADE'});
+User.belongsToMany(User, { as: 'Requesters', through: 'friendRequests', foreignKey: 'requesteeId', onDelete: 'CASCADE'});
+
 
 module.exports = {
     User, 
     Post, 
     Comment, 
-    Channel
+    // Friend
 };

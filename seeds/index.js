@@ -1,6 +1,6 @@
 // importing seed functions from their respective files 
 const seedUsers = require('./user-seeds');
-const seedChannels = require('./channel-seeds');
+// const seedFriends = require('./friend-seeds');
 const seedPosts = require('./post-seeds');
 const seedComments = require('./comment-seeds');
 // importing sequelize 
@@ -14,11 +14,13 @@ const seedAll = async () => {
     await seedUsers();
     console.log('\n----- USERS SEEDED -----\n');
 
+    // await seedFriends();
+    // console.log('\n----- FRIENDS SEEDED -----\n');
+
     await seedPosts();
     console.log('\n----- POSTS SEEDED -----\n');
 
-    await seedChannels();
-    console.log('\n----- CHANNELS SEEDED -----\n');
+    
 
     await seedComments();
     console.log('\n----- COMMENTS SEEDED -----\n');
