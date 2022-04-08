@@ -20,19 +20,18 @@ Friendship.init(
                 key: 'id'
             }
         },
-        user_id2: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
-            references: {
-                model: 'user',
-                key: 'id'
-            }
-        },
+        // user_id2: {
+        //     type: DataTypes.INTEGER,
+        //     allowNull: false,
+        //     references: {
+        //         model: 'user',
+        //         key: 'id'
+        //     }
+        // },
         date_est:{
            type: DataTypes.DATEONLY,
           allowNull:false
-        },
-      
+        }   
     },
     {
         sequelize,

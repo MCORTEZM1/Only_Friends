@@ -24,11 +24,8 @@ Comment.belongsTo(Post, {
     foreignKey: 'post_id',
     constraints:false
 });
-// Friendship.belongsToMany(User,  {  through:'Friendship',
-//     foreign_key:'user_id', 
-//     constraints:false
-// });
 
+Friendship.belongsTo(User, {foreignKey: 'user_id1'})
 
 // 1-to-Many relations 
 
