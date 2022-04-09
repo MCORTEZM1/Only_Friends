@@ -1,19 +1,23 @@
 <div id="newPostModal" class="modalHide">
-    <form class="new-post-form" id="new-post-form">
-      <div class="mb-3">
-          <label for="new-title">Post Title</label>
-          <input id="new-title" type="text" placeholder="Title">
+    {{!-- <form  class="new-post-form" id="new-post-form">
+     
+      <button id="submit-post" type="submit">Post</button>
+      <button id="close-btn">Cancel</button>
+    </form> --}}
+    {{!-- BEL --}}
+    <form class="new-post-form" action="/api/posts" method="post" enctype="multipart/form-data" >
+        <div class="mb-3">
+          <label for="title">Post Title</label>
+          <input id="title" name="title"  type="text" placeholder="Title">
       </div>
       <div class="mb-3">
-          <label for="new-body">Post Body</label>
-          <textarea name="new-body" id="new-body" cols="30" rows="10" placeholder="Text"></textarea>
+          <label for="post_body">Post Body</label>
+          <textarea name="post_body" id="post_body" cols="30" rows="10" placeholder="Text"></textarea>
       </div>
-      <div action="api/posts" method="POST" enctype="multipart/form-data" >
-          <input id="post-image" type="file" name="post_image" />
-      </div>
+        
       <div class="mb-3">
-          <label for="new-category"></label>
-          <select name="new-category" id="new-category">
+          <label for="category_name"></label>
+          <select name="category_name" id="category_name">
               <option value="Business">Business</option>
               <option value="Cars">Cars</option>
               <option value="Coding">Coding</option>
@@ -35,9 +39,8 @@
               <option value="Tech">Tech</option>
               <option value="Travel">Travel</option>
           </select>
-      </div>
-      <button id="submit-post" type="submit">Post</button>
-      <button id="close-btn">Cancel</button>
+      </div> 
+        <input id="image-id" type="file" name="image" />
+        <button id="image-btn" type='submit' >Submit Image</button>
     </form>
-
 </div>

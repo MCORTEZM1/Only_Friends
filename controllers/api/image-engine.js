@@ -3,7 +3,7 @@ const multer = require('multer');
 const imageStorageEngine = multer.diskStorage({
     destination: (req, file, cb) => {
   
-      cb(null, 'public/images');
+      cb(null, './public/images');
     },
     filename: (req, file, cb) => {
       
@@ -17,10 +17,12 @@ const fileFilter = (req, file, cb) => {
         // accept the image file
         cb(null, true);
     }
+
     else {
         cb(new Error('Filetype not accepted!'), false)
     }
 };
+
 
 const upload = multer({ 
     storage: imageStorageEngine, 

@@ -34,7 +34,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 // pass in /public to make the image accessible in URL
-app.use(/*'/public',*/ express.static(path.join(__dirname, 'public')));
+app.use( /*'public',*/ express.static(path.join(__dirname, 'public')));
 
 // engine must be set up after app intialization above 
 app.engine('handlebars', hbs.engine);

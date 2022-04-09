@@ -149,23 +149,27 @@ router.get('/category/:category_name', (req, res) => {
     });
 });
 
+
 // POST new POST w/ IMAGE optional; 
-router.post('/',  withAuth, upload.single('post_image'), (req, res) => {
-    console.log("THIS IS IT!!!", req.body.image_path)
-    // if (req.file) {
-         Post.create({
+router.post('/',  withAuth, upload.single("image"),  (req, res) => {
+    console.log("THIS IS IT!!!====================", req.file.path)
+    const path = req.file.path.split('\\');
+    const newPath = path[path.length - 2] + "/" + path[path.length - 1];
+    console.log(newPath)
+    //   if (req.file) {
+        Post.create({
             title: req.body.title,
             post_body: req.body.post_body,
             category_name: req.body.category_name,
             user_id: req.session.user_id,
-            image_path: req.body.image_path
-         })
+            image_path: newPath
+        })
         .then(postData => res.json(postData))
         .catch(err => {
             console.log(err);
             res.status(500).json(err);
         })
-    // //   }  
+    // }  
     //   else {
     //     Post.create({
     //         title: req.body.title,

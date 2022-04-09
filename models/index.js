@@ -2,7 +2,7 @@
 const User = require('./User');
 const Post = require('./Post');
 const Comment = require('./Comment');
-// const Friend = require('./Friend');
+const Friendship = require('./Friendship');
 
 
 
@@ -24,19 +24,17 @@ Comment.belongsTo(Post, {
     foreignKey: 'post_id',
     constraints:false
 });
-// Friend.belongsTo(User, {
-//     foreign_key:'user_id', 
-//     constraints:false
-// });
 
+Friendship.belongsTo(User, {foreignKey: 'user_id1'})
 
 // 1-to-Many relations 
-User.hasMany(Friend, {
-    foreignKey:'user_id',
-    constraints:false
-});
+
 User.hasMany(Comment, {
     foreignKey: 'user_id',
+    constraints:false
+});
+User.hasMany(Friendship,{
+    foreignkey:'user_id',
     constraints:false
 });
 
@@ -56,5 +54,5 @@ module.exports = {
     User, 
     Post, 
     Comment, 
-    Friend
+    Friendship
 };

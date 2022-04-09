@@ -39,7 +39,6 @@ router.get('/post/:id', (req, res) => {
             'post_body',
             'created_at',
             'image_path'
-
         ],
         include: [
             {

@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { User, Post, Comment } = require('../../models');
+const { User, Post, Comment, Friendship } = require('../../models');
 const upload = require('./image-engine');
 
 // GET all Users
@@ -48,6 +48,15 @@ router.get('/:id', (req, res) => {
                     model: Post,
                     attributes: ['title', 'id']
                 }
+            }, 
+
+            {
+                model: Friendship,
+                attributes: ['user_id1', ["user_id", 'owner'] ],
+                include: {
+                    model: User,
+                    attributes: ['username','image_path']
+                }
             }
         ]
     })
@@ -56,6 +65,9 @@ router.get('/:id', (req, res) => {
                 res.status(404).json({ message: 'No user found with this id number' });
                 return;
             }
+
+            //console.log("User Information ", userData); 
+            console.log("Friend Information ", userData.friendships[0].user.username); 
             res.json(userData)
         })
         .catch(err => {

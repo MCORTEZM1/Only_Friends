@@ -22,17 +22,17 @@ Post.init(
         // address string length in the future for title
         title: {
             type: DataTypes.STRING,
-            allowNull: false,
+            allowNull: true,
             //   len is for the length of characters min 2 and a max of 50
             len: [2,50]
         },
         post_body: {
             type: DataTypes.TEXT,
-            allowNull: false
+            allowNull: true
         },
         category_name: {
             type: DataTypes.STRING,
-            allowNull: false
+            allowNull: true
         },
         // this is our foreign key for our reference 
         user_id: {
