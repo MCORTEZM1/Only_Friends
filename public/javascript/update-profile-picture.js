@@ -18,12 +18,15 @@ closePicModal.addEventListener("click", function() {
 
 async function newPicFormHandler(event) {
     event.preventDefault();
-    id = req.session.user_id;
+    const id = document.querySelector(".logged-id").innerHTML;
+
+    console.log(id);
+    debugger
   
     const response = await fetch(`/api/users/${id}`,  {
       method: 'PUT',
       body: JSON.stringify({
-        image_path
+        user_image_path
       }),
       headers: {
         'Content-Type': 'application/json'
@@ -39,4 +42,4 @@ async function newPicFormHandler(event) {
     }
 }
   
-document.querySelector('#profile-image-btn').addEventListener('submit', newPicFormHandler);
+document.querySelector('#profile-image-btn').addEventListener('click', newPicFormHandler);

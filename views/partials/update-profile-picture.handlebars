@@ -1,5 +1,8 @@
 <div id="update-pic-modal" class="modalHide">
-    <form class="new-post-form" action="/api/posts" method="put" enctype="multipart/form-data" >
+    <h1 class="logged-id">{{loggedID}}</h1>
+    <form class="new-post-form" action="/api/users" method="put" enctype="multipart/form-data" >
+
+    
     
         <input id="profile-image-id" type="file" name="image" />
         <button id="profile-image-btn" type='submit' >Submit Image</button>

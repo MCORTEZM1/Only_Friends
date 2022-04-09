@@ -13,7 +13,8 @@ router.get('/',(req, res) => {
     // this needs to be determined 
     User.findAll({
         attributes:[
-            'username'
+            'username',
+            'user_image_path'
         ]
     })
     .then(userData => {
@@ -22,7 +23,9 @@ router.get('/',(req, res) => {
 
         res.render('homepage',{
             users,
-            loggedIn: req.session.loggedIn});
+            loggedIn: req.session.loggedIn,
+            loggedID: req.session.user_id
+        });
     })
 
 });
@@ -54,12 +57,12 @@ router.get('/post/:id', (req, res) => {
                 ],
                 include: {
                     model: User,
-                    attributes: ['username']
+                    attributes: ['username', 'user_image_path']
                 }
             },
             {
                 model: User,
-                attributes: ['username']
+                attributes: ['username', 'user_image_path']
 
             }]
     })
@@ -114,13 +117,13 @@ router.get('/post/category/:category_name', (req, res) => {
                 include: {
                     // username of commenter
                     model: User,
-                    attributes: ['username']
+                    attributes: ['username', 'user_image_path']
                 }
             },
             {
                 // owner of post
                 model: User,
-                attributes: ['username']
+                attributes: ['username', 'user_image_path']
             }
         ]
     })
@@ -151,7 +154,7 @@ router.get('/post/user/page/:username', (req, res) => {
         where: {
             username: req.params.username
         },
-        attributes: ['username', 'id'],
+        attributes: ['username', 'id', 'user_image_path'],
         includes: [
             {
                 model: Post,

@@ -17,7 +17,7 @@ User.init(
             primaryKey:true,
             allowNull:false,
         },
-        image_path: {
+        user_image_path: {
             type: DataTypes.STRING,
             allowNull: true,
         },

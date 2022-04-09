@@ -8,7 +8,7 @@ async function logoutUser() {
     });
     if (response.ok) {
        
-        document.location.replace('/');
+        document.location.reload();
         return
     } else {
         console.log(response.statusText + ' ' + response.status);

@@ -1,6 +1,8 @@
 const router = require("express").Router();
 const { User, Post, Comment } = require('../../models');
 const upload = require('./image-engine');
+const withAuth = require('../../public/javascript/utils/auth');
+
 
 // GET all Users
 router.get('/', (req, res) => {
@@ -9,7 +11,7 @@ router.get('/', (req, res) => {
         include: [
             {
                 model: Post,
-                attributes: ['id', 'title', /*'preview',*/ 'post_body', 'created_at', 'image_path']
+                attributes: ['id', 'title', /*'preview',*/ 'post_body', 'created_at', 'user_image_path']
             },
             {
                 model: Comment,
@@ -39,7 +41,7 @@ router.get('/:id', (req, res) => {
         include: [
             {
                 model: Post,
-                attributes: ['id', 'title', /*'preview',*/ 'post_body', 'created_at', 'image_path']
+                attributes: ['id', 'title', /*'preview',*/ 'post_body', 'created_at', 'user_image_path']
             },
             {
                 model: Comment,
@@ -90,13 +92,16 @@ router.post('/', (req, res) => {
 });
 
 // PUT update username or email 
-router.put('/:id', upload.single('profile_pic'), (req, res) => {
+router.put('/:id', withAuth, upload.single('image'), (req, res) => {
     console.log(req.file)
+    const imgPath = req.file.path.split('\\');
+    const newImgPath = "/" + imgPath[imgPath.length - 2] + "/" + imgPath[imgPath.length - 1];
+    console.log('++++++++++++++++++++++==========================', req.file.path);
     User.update(
         {
             username: req.body.username,
-            email: req.body.email,
-            image_path: req.file.path
+            email:req.body.email,
+            user_image_path: newImgPath,
         },
         {
             individualHooks: true,

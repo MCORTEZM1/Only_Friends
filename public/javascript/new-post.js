@@ -46,7 +46,7 @@ async function newFormHandler(event) {
     console.log(response)
 
     if (response.ok) {
-      document.location.replace('/');
+      document.location.reload();
     } else {
       alert(response.statusText );
     }
