@@ -3,6 +3,8 @@ const newPicModal = document.querySelector("#update-pic-modal");
 const closePicModal = document.querySelector("#cancel-modal");
 
 
+console.log(image_path);
+
 //function to display and hide update-profile-picture modal
 newPicBtn.addEventListener("click", function() {
     newPicModal.classList.add("modal");
@@ -18,7 +20,7 @@ async function newPicFormHandler(event) {
     event.preventDefault();
     id = req.session.user_id;
   
-    const response = await fetch(`/api/user/${id}`,  {
+    const response = await fetch(`/api/users/${id}`,  {
       method: 'PUT',
       body: JSON.stringify({
         image_path
