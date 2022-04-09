@@ -2,7 +2,7 @@
 const User = require('./User');
 const Post = require('./Post');
 const Comment = require('./Comment');
-const Friend = require('./Friend');
+// const Friend = require('./Friend');
 
 
 
