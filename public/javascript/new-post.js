@@ -1,6 +1,6 @@
 const newPostBtn = document.querySelector("#new-post");
 const newPostModal = document.querySelector("#newPostModal");
-const closePostModal = document.querySelector("#close-btn");
+const closePostModal = document.querySelector("#image-btn");
 
 const body = document.querySelector("body");
 
