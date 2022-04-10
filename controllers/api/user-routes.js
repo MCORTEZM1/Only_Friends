@@ -11,7 +11,7 @@ router.get('/', (req, res) => {
         include: [
             {
                 model: Post,
-                attributes: ['id', 'title', /*'preview',*/ 'post_body', 'created_at', 'image_path']
+                attributes: ['id', 'title', /*'preview',*/ 'post_body', 'created_at', 'user_image_path']
             },
             {
                 model: Comment,
@@ -41,7 +41,7 @@ router.get('/:id', (req, res) => {
         include: [
             {
                 model: Post,
-                attributes: ['id', 'title', /*'preview',*/ 'post_body', 'created_at', 'image_path']
+                attributes: ['id', 'title', /*'preview',*/ 'post_body', 'created_at', 'user_image_path']
             },
             {
                 model: Comment,
